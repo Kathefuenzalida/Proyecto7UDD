@@ -1,0 +1,58 @@
+/* Botón Mercado Pago */
+.buy-btn {
+  background-color: #009ee3;
+  border: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buy-btn:hover {
+  background-color: #007bb8;
+}
+
+/* Footer */
+.footer {
+  background: #111;
+  color: #fff;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+/* Blog Styles */
+.blog-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.blog-content h6 {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.modal-body .content p {
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.modal-body .content h6 {
+  border-left: 4px solid #28a745;
+  padding-left: 12px;
+  margin-left: -16px;
+}
+
+.footer .social-icons a {
+  color: #fff;
+  margin: 0 10px;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.footer .social-icons a:hover {
+  color: #009ee3;
+}
