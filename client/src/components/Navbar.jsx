@@ -22,11 +22,10 @@ function CustomNavbar() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
+          <Nav className="ms-auto fw-bold fs-6">
             <Nav.Link as={Link} to="/#interior">Plantas de Interior</Nav.Link>
             <Nav.Link as={Link} to="/#exterior">Plantas de Exterior</Nav.Link>
             <Nav.Link as={Link} to="/recomendaciones">Recomendaciones</Nav.Link>
-            <Nav.Link as={Link} to="/#decoracion">Decoración</Nav.Link>
 
             {/* 🔑 Opciones dinámicas según login */}
             {authStatus ? (

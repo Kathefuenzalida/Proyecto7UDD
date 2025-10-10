@@ -1,0 +1,156 @@
+/* ============================= */
+/* Fondo general para login y signup */
+/* ============================= */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+}
+
+/* Fondo de login */
+.login-bg {
+  background-image: url("/plants/Login.png");
+}
+
+/* Fondo de signup */
+.signup-bg {
+  background: #f5f5f5; /* tono neutro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ============================= */
+/* Sección izquierda en signup con logo */
+/* ============================= */
+.auth-left {
+  margin-right: 50px;
+}
+
+.auth-left img {
+  max-width: 300px;
+}
+
+/* ============================= */
+/* Formulario general */
+/* ============================= */
+.auth-form {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ============================= */
+/* Inputs */
+/* ============================= */
+.auth-card .form-control {
+  background-color: rgba(255, 255, 255, 0.95); /* blanco elegante */
+  border: 1px solid #bbb; /* borde gris suave */
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  color: #333;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.auth-card .form-control:focus {
+  border-color: #2e4635; /* verde oscuro del logo */
+  box-shadow: 0 0 6px rgba(46, 70, 53, 0.4); /* sombra verde sutil */
+  outline: none;
+}
+
+/* ============================= */
+/* Botón principal */
+/* ============================= */
+.auth-card .btn-primary {
+  background-color: #2e4635; /* verde oscuro elegante */
+  border: none;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* sombra suave */
+}
+
+.auth-card .btn-primary:hover {
+  background-color: #243629; /* un tono más oscuro */
+  transform: translateY(-2px); /* levanta un poquito el botón */
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15); /* sombra más marcada */
+}
+
+/* ============================= */
+/* Título */
+/* ============================= */
+.auth-card h2 {
+  font-family: "Segoe UI", sans-serif;
+  color: #2e4635; /* verde oscuro del logo */
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+/* Contenedor de dos columnas */
+.auth-content {
+  display: flex;
+  align-items: stretch; /* que ambas columnas tengan el mismo alto */
+  justify-content: center;
+  gap: 40px;
+  max-width: 1000px; /* limitar el ancho total */
+  margin: auto;
+}
+
+/* Columna izquierda */
+.auth-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.auth-left img {
+  max-width: 80%;   /* que no se desborde */
+  height: auto;
+  object-fit: contain;
+}
+
+/* Columna derecha (formulario) */
+.auth-form {
+  flex: 1;
+  max-width: 400px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Título */
+.auth-form h2 {
+  font-family: "Segoe UI", sans-serif;
+  color: #2e4635; /* mismo verde oscuro que el login */
+  font-weight: bold;
+  font-size: 1.6rem; /* un poquito más chico para armonizar */
+  margin-bottom: 1.2rem;
+  text-align: center;
+}

@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Contexto de usuario
+// Contextos
+import CartState from "./context/cart/CartState";
 import UserState from "./context/users/UserState";
 
 // Componentes
@@ -17,6 +18,7 @@ import Blog from "./pages/Blog";
 import Success from "./pages/Success";
 import Failure from "./pages/Failure";
 import Pending from "./pages/Pending";
+import Cart from "./pages/Cart"; // 🛒 nuevo
 
 // Rutas protegidas
 import PrivateRoute from "./components/Auth/PrivateRoute";
@@ -27,34 +29,60 @@ import "./style.css";
 
 function App() {
   return (
-    <UserState>
-      <Router>
-        <Navbar />
+    <CartState>
+      <UserState>
+        <Router>
+          <Navbar />
 
-        <main className="container mt-4 mb-5">
-          <Routes>
-            {/* RUTAS PRIVADAS */}
-            <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <main className="container mt-4 mb-5">
+            <Routes>
+              {/* RUTAS PRIVADAS */}
+              <Route
+                path="/profile"
+                element={
+                  <PrivateRoute>
+                    <Profile />
+                  </PrivateRoute>
+                }
+              />
 
-            {/* RUTAS DE AUTENTICACIÓN */}
-            <Route path="/register" element={<AuthRoute><Register /></AuthRoute>} />
-            <Route path="/login" element={<AuthRoute><Login /></AuthRoute>} />
+              {/* RUTAS DE AUTENTICACIÓN */}
+              <Route
+                path="/register"
+                element={
+                  <AuthRoute>
+                    <Register />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <AuthRoute>
+                    <Login />
+                  </AuthRoute>
+                }
+              />
 
-            {/* RUTAS DE PAGO (Mercado Pago) */}
-            <Route path="/success" element={<Success />} />
-            <Route path="/failure" element={<Failure />} />
-            <Route path="/pending" element={<Pending />} />
+              {/* RUTAS DE PAGO (Mercado Pago) */}
+              <Route path="/success" element={<Success />} />
+              <Route path="/failure" element={<Failure />} />
+              <Route path="/pending" element={<Pending />} />
 
-            {/* RUTAS PÚBLICAS */}
-            <Route path="/" element={<Home />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/recomendaciones" element={<Blog />} />
-          </Routes>
-        </main>
+              {/* RUTA NUEVA - CARRITO */}
+              <Route path="/cart" element={<Cart />} />
 
-        <Footer />
-      </Router>
-    </UserState>
+              {/* RUTAS PÚBLICAS */}
+              <Route path="/" element={<Home />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/recomendaciones" element={<Blog />} />
+            </Routes>
+          </main>
+
+          <Footer />
+        </Router>
+      </UserState>
+    </CartState>
   );
 }
 
