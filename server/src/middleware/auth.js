@@ -1,23 +1,34 @@
 import jwt from "jsonwebtoken";
 
-export const authMiddleware = (req, res, next) => {
+// Middleware para verificar token (proteger rutas)
+export const protect = (req, res, next) => {
   try {
-    // 1. Leer el token desde la cookie
     const token = req.cookies?.token;
 
     if (!token) {
       return res.status(401).json({ msg: "No autorizado, falta token" });
     }
 
-    // 2. Verificar el token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    // 3. Guardar el user en el request
     req.user = decoded.user;
-
     next();
   } catch (error) {
-    console.error("❌ Error en authMiddleware:", error.message);
+    console.error("❌ Error en protect:", error.message);
     res.status(401).json({ msg: "Token inválido o expirado" });
   }
+};
+
+// Middleware para verificar rol (solo admin, por ejemplo)
+export const authorize = (role) => {
+  return (req, res, next) => {
+    try {
+      if (!req.user || req.user.role !== role) {
+        return res.status(403).json({ msg: "Acceso denegado. Solo administradores." });
+      }
+      next();
+    } catch (error) {
+      console.error("❌ Error en authorize:", error.message);
+      res.status(500).json({ msg: "Error verificando permisos" });
+    }
+  };
 };

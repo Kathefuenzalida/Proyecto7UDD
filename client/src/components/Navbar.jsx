@@ -76,6 +76,12 @@ function CustomNavbar() {
                   <NavDropdown.Item as={Link} to="/profile">
                     <i className="bi bi-person me-2"></i>Mi Perfil
                   </NavDropdown.Item>
+
+                  {/* ⚙️ Nuevo acceso al Panel Admin */}
+                  <NavDropdown.Item as={Link} to="/admin">
+                    <i className="bi bi-gear me-2"></i>Panel Admin
+                  </NavDropdown.Item>
+
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={logout} className="text-danger">
                     <i className="bi bi-box-arrow-right me-2"></i>Cerrar sesión
