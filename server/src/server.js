@@ -37,6 +37,10 @@ app.use("/api/plants", plantRoutes);    // Catálogo público de plantas
 app.use("/api/payments", paymentRoutes);// Pasarela de pagos
 app.use("/api/products", productRoutes);// CRUD del admin para productos
 
+app.get("/", (req, res) => {
+  res.send("🌱 Botanic Soul backend activo y funcionando correctamente");
+});
+
 // 🟢 Servidor en marcha
 app.listen(PORT, () => {
   console.log(`Server corriendo en http://localhost:${PORT}`);
