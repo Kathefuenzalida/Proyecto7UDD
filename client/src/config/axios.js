@@ -1,7 +1,8 @@
 import axios from "axios";
 
+// ✅ Usa variable de entorno según el entorno (local o producción)
 const api = axios.create({
-  baseURL: "http://localhost:3000/api", // 👈 el backend sirve todo con /api
+  baseURL: import.meta.env.VITE_API_URL, 
   withCredentials: true,
 });
 

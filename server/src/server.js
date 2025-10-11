@@ -39,5 +39,5 @@ app.use("/api/products", productRoutes);// CRUD del admin para productos
 
 // 🟢 Servidor en marcha
 app.listen(PORT, () => {
-  console.log(`🚀 Server corriendo en http://localhost:${PORT}`);
+  console.log(`Server corriendo en http://localhost:${PORT}`);
 });
