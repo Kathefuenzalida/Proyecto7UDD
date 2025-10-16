@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import api from "../config/axios"; // instancia de Axios con la URL del backend
 import UserContext from "../context/users/UserContext";
 
 function AdminPanel() {
-  const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext); // 👉 ahora usamos el usuario logueado
   const [products, setProducts] = useState([]);
   const [form, setForm] = useState({
     name: "",
@@ -16,23 +16,21 @@ function AdminPanel() {
   const [editingId, setEditingId] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const API_URL = "http://localhost:3000/api/products";
-
-  // 🔹 Obtener productos al montar
+  // 🔹 Obtener productos al montar el componente
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get(API_URL);
+      const res = await api.get("/products");
       setProducts(res.data);
     } catch (error) {
       console.error("❌ Error al obtener productos:", error);
     }
   };
 
-  // 🔹 Manejar cambio en formulario
+  // 🔹 Manejar cambios en el formulario
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -47,21 +45,23 @@ function AdminPanel() {
 
     try {
       setLoading(true);
-      const config = {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      };
 
       if (editingId) {
-        await axios.put(`${API_URL}/${editingId}`, form, config);
+        await api.put(`/products/${editingId}`, form);
         alert("Producto actualizado correctamente ✅");
       } else {
-        await axios.post(API_URL, form, config);
+        await api.post("/products", form);
         alert("Producto creado correctamente 🌱");
       }
 
-      setForm({ name: "", description: "", price: "", image: "", category: "interior", stock: "" });
+      setForm({
+        name: "",
+        description: "",
+        price: "",
+        image: "",
+        category: "interior",
+        stock: "",
+      });
       setEditingId(null);
       fetchProducts();
     } catch (error) {
@@ -72,9 +72,16 @@ function AdminPanel() {
     }
   };
 
-  // 🔹 Cargar datos al editar
+  // 🔹 Cargar datos en el formulario al editar
   const handleEdit = (product) => {
-    setForm(product);
+    setForm({
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      image: product.image,
+      category: product.category,
+      stock: product.stock,
+    });
     setEditingId(product._id);
   };
 
@@ -82,12 +89,7 @@ function AdminPanel() {
   const handleDelete = async (id) => {
     if (window.confirm("¿Seguro que deseas eliminar este producto?")) {
       try {
-        const config = {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        };
-        await axios.delete(`${API_URL}/${id}`, config);
+        await api.delete(`/products/${id}`);
         fetchProducts();
         alert("Producto eliminado correctamente 🗑️");
       } catch (error) {
@@ -97,10 +99,20 @@ function AdminPanel() {
     }
   };
 
+  // 🔹 Validación opcional de acceso (solo admins)
+  if (user && user.role !== "admin") {
+    return (
+      <div className="container mt-5 text-center">
+        <h3 className="text-danger fw-bold">Acceso restringido 🚫</h3>
+        <p>Solo los administradores pueden acceder a este panel.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="container mt-5">
       <h2 className="text-center mb-4 fw-bold" style={{ color: "#2e4635" }}>
-        Panel de Administración
+        Panel de Administración {user && `– Bienvenida, ${user.username}`}
       </h2>
 
       {/* ✅ Formulario */}
@@ -178,7 +190,11 @@ function AdminPanel() {
             className="btn btn-dark w-100 mt-3"
             disabled={loading}
           >
-            {loading ? "Guardando..." : editingId ? "Actualizar producto" : "Crear producto"}
+            {loading
+              ? "Guardando..."
+              : editingId
+              ? "Actualizar producto"
+              : "Crear producto"}
           </button>
         </form>
       </div>

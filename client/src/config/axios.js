@@ -2,16 +2,25 @@ import axios from "axios";
 
 // ✅ Usa variable de entorno según el entorno (local o producción)
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL, 
+  baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
 });
 
-// Interceptor para debugging
-api.interceptors.request.use((request) => {
-  console.log("🚀 Request:", request.method?.toUpperCase(), request.url);
-  return request;
-});
+// ✅ Interceptor para agregar el token automáticamente
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token"); // Asegúrate de que el token se guarda con esta clave
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
 
+    console.log("🚀 Request:", config.method?.toUpperCase(), config.url);
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// ✅ Interceptor de respuesta (para debugging)
 api.interceptors.response.use(
   (response) => {
     console.log("✅ Response:", response.status, response.config.url);
