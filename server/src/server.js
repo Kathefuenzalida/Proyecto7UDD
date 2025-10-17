@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 3000;
 
 // 🧩 Middlewares
 app.use(cors({
-  origin: [process.env.FRONTEND_URL, "https://botanicsoul.netlify.app", "http://localhost:5173"],
+  origin: [process.env.FRONTEND_URL, "https://botanicsoul.netlify.app", "http://localhost:5173", "http://localhost:5174"],
   credentials: true,
 }));
 app.use(express.json());
