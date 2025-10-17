@@ -32,22 +32,33 @@ const UserState = ({ children }) => {
   };
 
   // 👉 Login
-  const loginUser = async (dataForm) => {
-    dispatch({ type: "LOADING_START" });
-    try {
-      const res = await api.post("/auth/login", dataForm);
-      dispatch({
-        type: "LOGIN_EXITOSO",
-        payload: res.data.user,
-      });
-    } catch (error) {
-      console.error("❌ Error login:", error.response?.data || error);
-      dispatch({
-        type: "ERROR_LOGIN",
-        payload: error.response?.data?.msg || "Error al iniciar sesión",
-      });
+ // 👉 Login
+const loginUser = async (dataForm) => {
+  dispatch({ type: "LOADING_START" });
+  try {
+    const res = await api.post("/auth/login", dataForm);
+
+    // ✅ Guarda el token en localStorage
+    if (res.data.token) {
+      localStorage.setItem("token", res.data.token);
+      console.log("🔐 Token guardado:", res.data.token);
+    } else {
+      console.warn("⚠️ No se recibió token en la respuesta del backend.");
     }
-  };
+
+    dispatch({
+      type: "LOGIN_EXITOSO",
+      payload: res.data.user,
+    });
+  } catch (error) {
+    console.error("❌ Error login:", error.response?.data || error);
+    dispatch({
+      type: "ERROR_LOGIN",
+      payload: error.response?.data?.msg || "Error al iniciar sesión",
+    });
+  }
+};
+
 
   // 👉 Verificar usuario
   const verifyingToken = async () => {
