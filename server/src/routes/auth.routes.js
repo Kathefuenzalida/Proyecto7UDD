@@ -15,7 +15,7 @@ router.post("/signup", async (req, res) => {
     user = new User({ username, email, password });
     await user.save();
 
-    const token = jwt.sign({ user: { id: user._id } }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ user: { id: user._id, role: user.role } }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 
@@ -25,7 +25,8 @@ router.post("/signup", async (req, res) => {
       sameSite: 'lax' // permite envío de cookies cross-origin
     }).json({
       msg: "Usuario registrado",
-      user: { username: user.username, email: user.email },
+      user: { username: user.username, email: user.email, role: user.role },
+      token, // Enviar el token en el cuerpo de la respuesta
     });
   } catch (error) {
     res.status(500).json({ msg: error.message });
@@ -41,7 +42,7 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ msg: "Credenciales inválidas" });
     }
 
-    const token = jwt.sign({ user: { id: user._id } }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ user: { id: user._id, role: user.role } }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 
@@ -51,7 +52,8 @@ router.post("/login", async (req, res) => {
       sameSite: 'lax' // permite envío de cookies cross-origin
     }).json({
       msg: "Login exitoso",
-      user: { username: user.username, email: user.email },
+      user: { username: user.username, email: user.email, role: user.role },
+      token, // Enviar el token en el cuerpo de la respuesta
     });
   } catch (error) {
     res.status(500).json({ msg: error.message });

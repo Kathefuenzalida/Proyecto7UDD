@@ -18,6 +18,13 @@ const UserState = ({ children }) => {
     dispatch({ type: "LOADING_START" });
     try {
       const res = await api.post("/auth/signup", dataForm);
+      // ✅ Guarda el token en localStorage
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+        console.log("🔐 Token guardado (registro):", res.data.token);
+      } else {
+        console.warn("⚠️ No se recibió token en la respuesta del backend (registro).");
+      }
       dispatch({
         type: "REGISTRO_EXITOSO",
         payload: res.data.user,
@@ -32,11 +39,10 @@ const UserState = ({ children }) => {
   };
 
   // 👉 Login
- // 👉 Login
-const loginUser = async (dataForm) => {
-  dispatch({ type: "LOADING_START" });
-  try {
-    const res = await api.post("/auth/login", dataForm);
+  const loginUser = async (dataForm) => {
+    dispatch({ type: "LOADING_START" });
+    try {
+      const res = await api.post("/auth/login", dataForm);
 
     // ✅ Guarda el token en localStorage
     if (res.data.token) {
