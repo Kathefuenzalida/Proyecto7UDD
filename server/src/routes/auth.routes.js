@@ -16,7 +16,7 @@ router.post("/signup", async (req, res) => {
     await user.save();
 
     const token = jwt.sign({ user: { id: user._id, role: user.role } }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "7d", // Aumentar la duración del token para mejorar la experiencia de usuario
     });
 
     res.cookie("token", token, { 
@@ -43,7 +43,7 @@ router.post("/login", async (req, res) => {
     }
 
     const token = jwt.sign({ user: { id: user._id, role: user.role } }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "7d", // Aumentar la duración del token para mejorar la experiencia de usuario
     });
 
     res.cookie("token", token, { 

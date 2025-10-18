@@ -162,6 +162,7 @@ function AdminPanel() {
                 className="form-control"
                 value={form.stock}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="col-md-12">
