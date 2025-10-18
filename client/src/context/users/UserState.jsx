@@ -99,11 +99,16 @@ const UserState = ({ children }) => {
 
   // 👉 Logout
   const logout = async () => {
+    dispatch({ type: "LOADING_START" }); // Iniciar loading para indicar que algo está pasando
     try {
+      console.log("Attempting to log out..."); // Log para depuración
       await api.post("/auth/logout");
+      localStorage.removeItem("token"); // Asegurarse de eliminar el token de localStorage
+      console.log("Logout successful, token removed."); // Log para depuración
       dispatch({ type: "CERRAR_SESION" });
     } catch (error) {
       console.error("❌ Error cerrando sesión:", error.response?.data || error);
+      dispatch({ type: "LOADING_FINISHED" }); // Terminar loading en caso de error
     }
   };
 

@@ -72,6 +72,7 @@ router.get("/profile", protect, async (req, res) => {
 
 // Logout
 router.post("/logout", (req, res) => {
+  console.log("Logout route hit. Clearing cookie..."); // Log para depuración
   res.clearCookie("token").json({ msg: "Sesión cerrada" });
 });
 

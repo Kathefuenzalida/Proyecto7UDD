@@ -12,6 +12,7 @@ function Home() {
     const fetchProducts = async () => {
       try {
         const res = await api.get("/products"); // Obtener productos de la API
+        console.log("Fetched products:", res.data); // Log para depuración
         setProducts(res.data);
         setLoading(false);
       } catch (err) {
@@ -25,10 +26,16 @@ function Home() {
   }, []);
 
   const interiorPlants = products.filter(
-    (plant) => plant.category === "interior"
+    (plant) => {
+      console.log(`Plant: ${plant.name}, Category: ${plant.category}, Is interior? ${plant.category === "interior"}`); // Log para depuración
+      return plant.category === "interior";
+    }
   );
   const exteriorPlants = products.filter(
-    (plant) => plant.category === "exterior"
+    (plant) => {
+      console.log(`Plant: ${plant.name}, Category: ${plant.category}, Is exterior? ${plant.category === "exterior"}`); // Log para depuración
+      return plant.category === "exterior";
+    }
   );
 
   if (loading) {
