@@ -32,10 +32,10 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.error("❌ Error al conectar MongoDB:", err));
 
 // 🚏 Rutas principales
-app.use("/api/auth", authRoutes);       // Login, registro, JWT
-app.use("/api/plants", plantRoutes);    // Catálogo público de plantas
-app.use("/api/payments", paymentRoutes);// Pasarela de pagos
-app.use("/api/products", productRoutes);// CRUD del admin para productos
+app.use("/auth", authRoutes);       // Login, registro, JWT
+app.use("/plants", plantRoutes);    // Catálogo público de plantas
+app.use("/payments", paymentRoutes);// Pasarela de pagos
+app.use("/products", productRoutes);// CRUD del admin para productos
 
 app.get("/", (req, res) => {
   res.send("🌱 Botanic Soul backend activo y funcionando correctamente");
