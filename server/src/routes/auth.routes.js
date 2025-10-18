@@ -21,7 +21,7 @@ router.post("/signup", async (req, res) => {
 
     res.cookie("token", token, { 
       httpOnly: true,
-      secure: false, // false para desarrollo local (http)
+      secure: process.env.NODE_ENV === 'production', // Usar secure: true en producción (HTTPS)
       sameSite: 'lax' // permite envío de cookies cross-origin
     }).json({
       msg: "Usuario registrado",
@@ -48,7 +48,7 @@ router.post("/login", async (req, res) => {
 
     res.cookie("token", token, { 
       httpOnly: true,
-      secure: false, // false para desarrollo local (http)
+      secure: process.env.NODE_ENV === 'production', // Usar secure: true en producción (HTTPS)
       sameSite: 'lax' // permite envío de cookies cross-origin
     }).json({
       msg: "Login exitoso",
