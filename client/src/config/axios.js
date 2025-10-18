@@ -2,7 +2,7 @@ import axios from "axios";
 
 // ✅ Usa variable de entorno según el entorno (local o producción)
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: `${import.meta.env.VITE_API_URL}/api`, // Añadir el prefijo /api
   withCredentials: true,
 });
 
