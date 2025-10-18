@@ -7,7 +7,8 @@ export const createProduct = async (req, res) => {
     const savedProduct = await newProduct.save();
     res.status(201).json(savedProduct);
   } catch (error) {
-    res.status(500).json({ message: "Error al crear producto", error: error.message });
+    console.error("❌ Error detallado al crear producto:", error); // Log completo del error
+    res.status(500).json({ message: "Error al crear producto", error: error.message, details: error });
   }
 };
 
