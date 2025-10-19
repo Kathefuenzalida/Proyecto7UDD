@@ -49,7 +49,7 @@ export default function Cart() {
           </thead>
           <tbody>
             {items.map(p => (
-              <tr key={p.id}>
+              <tr key={p._id}> {/* Usar p._id */}
                 <td className="d-flex align-items-center gap-2">
                   <img alt={p.name} src={p.image} style={{ width: 48, height: 48, objectFit: "cover", borderRadius: 8 }} />
                   {p.name}
@@ -57,14 +57,14 @@ export default function Cart() {
                 <td>${p.price.toLocaleString("es-CL")}</td>
                 <td>
                   <div className="btn-group">
-                    <button className="btn btn-sm btn-outline-secondary" onClick={() => removeOne(p.id)}>-</button>
+                    <button className="btn btn-sm btn-outline-secondary" onClick={() => removeOne(p._id)}>-</button> {/* Usar p._id */}
                     <span className="btn btn-sm btn-light disabled">{p.qty}</span>
                     <button className="btn btn-sm btn-outline-secondary" onClick={() => addToCart(p)}>+</button>
                   </div>
                 </td>
                 <td>${(p.price * p.qty).toLocaleString("es-CL")}</td>
                 <td>
-                  <button className="btn btn-sm btn-outline-danger" onClick={() => deleteItem(p.id)}>
+                  <button className="btn btn-sm btn-outline-danger" onClick={() => deleteItem(p._id)}> {/* Usar p._id */}
                     Quitar
                   </button>
                 </td>

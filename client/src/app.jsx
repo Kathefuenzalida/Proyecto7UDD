@@ -20,6 +20,7 @@ import Failure from "./pages/Failure";
 import Pending from "./pages/Pending";
 import Cart from "./pages/Cart";
 import AdminPanel from "./pages/AdminPanel"; // 🧩 nuevo
+import ProductDetail from "./pages/ProductDetail"; // Importar ProductDetail
 
 // Rutas protegidas
 import PrivateRoute from "./components/Auth/PrivateRoute";
@@ -87,6 +88,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/recomendaciones" element={<Blog />} />
+              <Route path="/products/:id" element={<ProductDetail />} /> {/* Nueva ruta para detalle de producto */}
             </Routes>
           </main>
 

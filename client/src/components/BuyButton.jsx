@@ -1,35 +1,19 @@
 // client/src/components/BuyButton.jsx
-import React from "react";
+import React, { useContext } from "react"; // Importar useContext
 import { Button } from "react-bootstrap";
-import api from "../config/axios";
+import CartContext from "../context/cart/CartContext"; // Importar CartContext
 
 function BuyButton({ plant }) {
-  const handleBuy = async () => {
-    try {
-      console.log("🪴 Enviando al backend:", plant);
+  const { addToCart } = useContext(CartContext); // Usar el contexto del carrito
 
-      const response = await api.post("/payments", {
-        title: plant.name,
-        unit_price: plant.price,
-        quantity: 1,
-      });
-
-      const preferenceId = response.data.id;
-      window.location.href = `https://www.mercadopago.cl/checkout/v1/redirect?pref_id=${preferenceId}`;
-    } catch (error) {
-      console.error("❌ Error al crear preferencia:", error);
-      alert("No se pudo iniciar el pago. Revisa la consola.");
-    }
+  const handleAddToCart = () => { // Cambiar nombre de la función
+    addToCart(plant); // Añadir el producto al carrito
+    alert(`${plant.name} añadido al carrito!`); // Notificación simple
   };
 
   return (
-    <Button variant="success" onClick={handleBuy}>
-      Comprar{" "}
-      <img
-        src="/mercadopago.jpg"
-        alt="Mercado Pago"
-        style={{ width: "24px", marginLeft: "8px" }}
-      />
+    <Button variant="primary" onClick={handleAddToCart}> {/* Cambiar variante y onClick */}
+      Añadir al Carrito
     </Button>
   );
 }
