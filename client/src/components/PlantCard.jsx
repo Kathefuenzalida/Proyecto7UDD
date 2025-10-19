@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom"; // Importar Link
+import { Link } from "react-router-dom";
 import BuyButton from "./BuyButton";
 
 function PlantCard({ plant }) {

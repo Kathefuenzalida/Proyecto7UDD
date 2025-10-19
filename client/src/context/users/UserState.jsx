@@ -13,17 +13,17 @@ const UserState = ({ children }) => {
 
   const [globalState, dispatch] = useReducer(UserReducer, initialState);
 
-  // 👉 Signup
+  // Signup
   const registerUser = async (dataForm) => {
     dispatch({ type: "LOADING_START" });
     try {
       const res = await api.post("/auth/signup", dataForm);
-      // ✅ Guarda el token en localStorage
+      // Guarda el token en localStorage
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
-        console.log("🔐 Token guardado (registro):", res.data.token);
+        console.log("Token guardado (registro):", res.data.token);
       } else {
-        console.warn("⚠️ No se recibió token en la respuesta del backend (registro).");
+        console.warn("No se recibió token en la respuesta del backend (registro).");
       }
       dispatch({
         type: "REGISTRO_EXITOSO",
@@ -44,7 +44,7 @@ const UserState = ({ children }) => {
     try {
       const res = await api.post("/auth/login", dataForm);
 
-    // ✅ Guarda el token en localStorage
+    // Guarda el token en localStorage
     if (res.data.token) {
       localStorage.setItem("token", res.data.token);
       console.log("🔐 Token guardado:", res.data.token);
@@ -65,7 +65,7 @@ const UserState = ({ children }) => {
   }
 };
 
-  // 👉 Verificar usuario
+  // Verificar usuario
   const verifyingToken = async () => {
     try {
       const res = await api.get("/auth/profile");
@@ -76,14 +76,14 @@ const UserState = ({ children }) => {
     } catch (error) {
       // Solo mostrar error si NO es un 401 (no autorizado es normal cuando no está logueado)
       if (error.response?.status !== 401) {
-        console.error("❌ Error verificando usuario:", error.response?.data || error);
+        console.error("Error verificando usuario:", error.response?.data || error);
       }
       // Si hay error, marcar loading como false
       dispatch({ type: "LOADING_FINISHED" });
     }
   };
 
-  // 🔄 Verificar token al cargar la app solo si es necesario
+  // Verificar token al cargar la app solo si es necesario
   useEffect(() => {
     // Solo verificar si hay posibilidad de tener una sesión
     // (puedes personalizar esta lógica según tus necesidades)
@@ -92,12 +92,12 @@ const UserState = ({ children }) => {
     if (shouldVerify) {
       verifyingToken();
     } else {
-      // Marcar como terminado el loading si no vamos a verificar
+      // Marcar como terminado el loading si no voy a verificar
       dispatch({ type: "LOADING_FINISHED" });
     }
   }, []);
 
-  // 👉 Logout
+  // Logout
   const logout = async () => {
     dispatch({ type: "LOADING_START" }); // Iniciar loading para indicar que algo está pasando
     try {
@@ -107,12 +107,12 @@ const UserState = ({ children }) => {
       console.log("Logout successful, token removed."); // Log para depuración
       dispatch({ type: "CERRAR_SESION" });
     } catch (error) {
-      console.error("❌ Error cerrando sesión:", error.response?.data || error);
+      console.error("Error cerrando sesión:", error.response?.data || error);
       dispatch({ type: "LOADING_FINISHED" }); // Terminar loading en caso de error
     }
   };
 
-  // 👉 Limpiar errores
+  // Limpiar errores
   const clearError = () => {
     dispatch({ type: "CLEAR_ERROR" });
   };

@@ -14,13 +14,13 @@ api.interceptors.request.use(
       config.headers.Authorization = `Bearer ${token}`;
     }
 
-    console.log("🚀 Request:", config.method?.toUpperCase(), config.url);
+    console.log("Request:", config.method?.toUpperCase(), config.url);
     return config;
   },
   (error) => Promise.reject(error)
 );
 
-// ✅ Interceptor de respuesta (para debugging)
+// Interceptar respuesta para depurar
 api.interceptors.response.use(
   (response) => {
     console.log("✅ Response:", response.status, response.config.url);

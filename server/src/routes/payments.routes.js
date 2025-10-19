@@ -7,14 +7,14 @@ router.post("/", async (req, res) => {
   try {
     const { title, unit_price, quantity } = req.body;
 
-    console.log("🚀 Datos recibidos en /api/payments:", { title, unit_price, quantity });
+    console.log("Datos recibidos en /api/payments:", { title, unit_price, quantity });
 
     const client = new MercadoPagoConfig({
       accessToken: process.env.MP_ACCESS_TOKEN,
     });
     const preference = new Preference(client);
 
-    // ⚡ Versión simple (sandbox / local)
+    // Versión simple (sandbox / local)
     const preferenceData = {
       items: [
         {
@@ -29,18 +29,18 @@ router.post("/", async (req, res) => {
       },
     };
 
-    console.log("📝 Creando preferencia:", JSON.stringify(preferenceData, null, 2));
+    console.log("Creando preferencia:", JSON.stringify(preferenceData, null, 2));
 
     const result = await preference.create({ body: preferenceData });
 
-    console.log("✅ Preferencia creada:", result.id);
+    console.log("Preferencia creada:", result.id);
     res.json({
       id: result.id,
       init_point: result.init_point,
       sandbox_init_point: result.sandbox_init_point,
     });
   } catch (error) {
-    console.error("❌ Error detallado:", error);
+    console.error("Error detallado:", error);
     res.status(500).json({
       error: "Error creando preferencia",
       message: error.message,

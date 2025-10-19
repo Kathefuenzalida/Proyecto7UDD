@@ -1,4 +1,3 @@
-// client/src/components/BuyButton.jsx
 import React, { useContext } from "react"; // Importar useContext
 import { Button } from "react-bootstrap";
 import CartContext from "../context/cart/CartContext"; // Importar CartContext

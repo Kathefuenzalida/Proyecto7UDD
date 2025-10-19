@@ -37,7 +37,7 @@ function CustomNavbar() {
               <i className="bi bi-cart me-1"></i> Carrito
             </Nav.Link>
 
-            {/* 🔑 Opciones dinámicas según login */}
+            {/* Opciones dinámicas según login */}
             {authStatus ? (
               <>
                 {/* Dropdown del usuario con avatar */}

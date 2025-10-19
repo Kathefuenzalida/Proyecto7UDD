@@ -24,7 +24,7 @@ export const protect = (req, res, next) => {
   }
 };
 
-// Middleware para verificar rol (solo admin, por ejemplo)
+// Middleware para verificar rol
 export const authorize = (role) => {
   return (req, res, next) => {
     try {

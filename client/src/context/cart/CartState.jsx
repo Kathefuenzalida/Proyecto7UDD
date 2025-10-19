@@ -6,13 +6,11 @@ const CartState = ({ children }) => {
   const initialState = { items: [] };
   const [state, dispatch] = useReducer(CartReducer, initialState);
 
-  // hidratar desde localStorage
   useEffect(() => {
     const saved = localStorage.getItem("cart");
     if (saved) dispatch({ type: "HYDRATE", payload: JSON.parse(saved) });
   }, []);
 
-  // persistir en localStorage
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(state));
   }, [state]);

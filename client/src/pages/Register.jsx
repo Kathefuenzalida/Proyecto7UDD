@@ -1,8 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../context/users/UserContext";
-import "./Auth.css"; // reutilizamos los estilos
-
+import "./Auth.css"; 
 function Register() {
   const navigate = useNavigate();
   const { registerUser, authStatus, error: contextError } = useContext(UserContext);

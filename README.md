@@ -93,14 +93,6 @@ Este proyecto es una aplicación Fullstack de comercio electrónico para la vent
 7.  **Acceder a la Aplicación:**
     *   Abre tu navegador y visita `http://localhost:5173`.
 
-## Cuentas de Prueba (si aplica)
-
-*   **Admin:**
-    *   Usuario: `admin`
-    *   Contraseña: `admin123`
-*   **Usuario Normal:**
-    *   Usuario: `user`
-    *   Contraseña: `user123`
 
 (Estas cuentas se crean si ejecutas el script `seed.js` y si tu `seed.js` incluye la creación de usuarios de prueba).
 

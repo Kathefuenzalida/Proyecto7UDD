@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import api from "../config/axios"; // instancia de Axios con la URL del backend
+import api from "../config/axios"; 
 import UserContext from "../context/users/UserContext";
 
 function AdminPanel() {
-  const { user } = useContext(UserContext); // 👉 ahora usamos el usuario logueado
+  const { user } = useContext(UserContext); 
   const [products, setProducts] = useState([]);
   const [form, setForm] = useState({
     name: "",
@@ -16,7 +16,6 @@ function AdminPanel() {
   const [editingId, setEditingId] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // 🔹 Obtener productos al montar el componente
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -30,12 +29,10 @@ function AdminPanel() {
     }
   };
 
-  // 🔹 Manejar cambios en el formulario
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // 🔹 Crear o editar producto
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.name || !form.price) {
@@ -65,14 +62,13 @@ function AdminPanel() {
       setEditingId(null);
       fetchProducts();
     } catch (error) {
-      console.error("❌ Error al guardar producto:", error);
+      console.error("Error al guardar producto:", error);
       alert("Error al guardar producto. Asegúrate de tener rol admin.");
     } finally {
       setLoading(false);
     }
   };
 
-  // 🔹 Cargar datos en el formulario al editar
   const handleEdit = (product) => {
     setForm({
       name: product.name,
@@ -85,7 +81,7 @@ function AdminPanel() {
     setEditingId(product._id);
   };
 
-  // 🔹 Eliminar producto
+  // Eliminar producto
   const handleDelete = async (id) => {
     if (window.confirm("¿Seguro que deseas eliminar este producto?")) {
       try {
@@ -93,13 +89,13 @@ function AdminPanel() {
         fetchProducts();
         alert("Producto eliminado correctamente 🗑️");
       } catch (error) {
-        console.error("❌ Error al eliminar producto:", error);
+        console.error("Error al eliminar producto:", error);
         alert("Error al eliminar producto. Verifica tu rol admin.");
       }
     }
   };
 
-  // 🔹 Validación opcional de acceso (solo admins)
+  // Validación opcional de acceso (solo admins)
   if (user && user.role !== "admin") {
     return (
       <div className="container mt-5 text-center">
@@ -115,7 +111,7 @@ function AdminPanel() {
         Panel de Administración {user && `– Bienvenida, ${user.username}`}
       </h2>
 
-      {/* ✅ Formulario */}
+      {/* Formulario */}
       <div className="card p-4 mb-4 shadow-sm">
         <h5>{editingId ? "Editar producto" : "Crear nuevo producto"}</h5>
         <form onSubmit={handleSubmit}>
@@ -200,7 +196,7 @@ function AdminPanel() {
         </form>
       </div>
 
-      {/* ✅ Listado */}
+      {/* Listado */}
       <div className="table-responsive">
         <table className="table table-striped table-hover">
           <thead className="table-dark">

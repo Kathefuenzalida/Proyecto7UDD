@@ -7,7 +7,7 @@ export default function Cart() {
 
   const checkout = async () => {
     try {
-      // MercadoPago sandbox: enviaremos un único ítem con el total
+      // MercadoPago
       const res = await api.post("/payments", {
         title: `Compra Botanic Soul (${items.length} producto/s)`,
         unit_price: Number(total),
@@ -22,7 +22,7 @@ export default function Cart() {
       // redirección
       window.location.href = `https://www.mercadopago.cl/checkout/v1/redirect?pref_id=${pref}`;
     } catch (err) {
-      console.error("❌ Error checkout:", err);
+      console.error("Error checkout:", err);
       alert("No se pudo iniciar el pago. Revisa consola.");
     }
   };

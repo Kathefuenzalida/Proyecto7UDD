@@ -18,7 +18,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🧩 Middlewares
+// Middlewares
 app.use(cors({
   origin: [process.env.FRONTEND_URL, "https://botanicsoul.netlify.app", "https://botanicsoul-backend.onrender.com", "http://localhost:5173", "http://localhost:5174"],
   credentials: true,
@@ -26,12 +26,12 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-// 🗄️ Conexión a MongoDB
+// Conexión a MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ Conectado a MongoDB"))
   .catch(err => console.error("❌ Error al conectar MongoDB:", err));
 
-// 🚏 Rutas principales
+// Rutas principales
 app.use("/api/auth", authRoutes);       // Login, registro, JWT
 app.use("/api/plants", plantRoutes);    // Catálogo público de plantas
 app.use("/api/payments", paymentRoutes);// Pasarela de pagos
@@ -41,7 +41,7 @@ app.get("/", (req, res) => {
   res.send("🌱 Botanic Soul backend activo y funcionando correctamente");
 });
 
-// 🟢 Servidor en marcha
+// Servidor en marcha
 app.listen(PORT, () => {
   console.log(`Server corriendo en http://localhost:${PORT}`);
 });

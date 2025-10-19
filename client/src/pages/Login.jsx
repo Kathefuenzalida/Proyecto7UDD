@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../context/users/UserContext";
-import "./Auth.css"; // 👈 agregamos estilos personalizados
+import "./Auth.css"; // agregamos estilos personalizados
 
 function Login() {
   const navigate = useNavigate();
@@ -28,8 +28,8 @@ function Login() {
   }, [authStatus, navigate]);
 
   return (
-    <div className="auth-container login-bg"> {/* 👈 aquí el fondo */}
-      <div className="card auth-card"> {/* 👈 card con estilo limpio */}
+    <div className="auth-container login-bg"> {/* aquí el fondo */}
+      <div className="card auth-card"> {/* card con estilo limpio */}
         <div className="card-body">
           <h2 className="card-title text-center mb-4">Iniciar sesión</h2>
 

@@ -19,7 +19,7 @@ import Success from "./pages/Success";
 import Failure from "./pages/Failure";
 import Pending from "./pages/Pending";
 import Cart from "./pages/Cart";
-import AdminPanel from "./pages/AdminPanel"; // 🧩 nuevo
+import AdminPanel from "./pages/AdminPanel"; //  nuevo
 import ProductDetail from "./pages/ProductDetail"; // Importar ProductDetail
 
 // Rutas protegidas
@@ -38,7 +38,7 @@ function App() {
 
           <main className="container mt-4 mb-5">
             <Routes>
-              {/* 🔒 RUTAS PRIVADAS */}
+              {/* RUTAS PRIVADAS */}
               <Route
                 path="/profile"
                 element={
@@ -48,7 +48,7 @@ function App() {
                 }
               />
 
-              {/* 🧩 Nueva ruta protegida del panel admin */}
+              {/* Nueva ruta protegida del panel admin */}
               <Route
                 path="/admin"
                 element={
@@ -58,7 +58,7 @@ function App() {
                 }
               />
 
-              {/* 🔑 RUTAS DE AUTENTICACIÓN */}
+              {/* 🔑RUTAS DE AUTENTICACIÓN */}
               <Route
                 path="/register"
                 element={
@@ -76,15 +76,15 @@ function App() {
                 }
               />
 
-              {/* 💳 RUTAS DE PAGO (Mercado Pago) */}
+              {/* RUTAS DE PAGO (Mercado Pago) */}
               <Route path="/success" element={<Success />} />
               <Route path="/failure" element={<Failure />} />
               <Route path="/pending" element={<Pending />} />
 
-              {/* 🛒 RUTA DEL CARRITO */}
+              {/* RUTA DEL CARRITO */}
               <Route path="/cart" element={<Cart />} />
 
-              {/* 🌿 RUTAS PÚBLICAS */}
+              {/* RUTAS PÚBLICAS */}
               <Route path="/" element={<Home />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/recomendaciones" element={<Blog />} />

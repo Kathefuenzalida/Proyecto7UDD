@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Alert, Spinner } from "react-bootstrap";
 import PlantCard from "../components/PlantCard";
-import api from "../config/axios"; // Importar la instancia de axios
+import api from "../config/axios"; 
 
 function Home() {
   const [products, setProducts] = useState([]);
