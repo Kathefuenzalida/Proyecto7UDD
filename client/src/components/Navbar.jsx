@@ -2,10 +2,17 @@ import React, { useContext } from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import UserContext from "../context/users/UserContext";
+import CartContext from "../context/cart/CartContext"; // Importar CartContext
 
 function CustomNavbar() {
   const userCtx = useContext(UserContext);
   const { user, logout, authStatus } = userCtx;
+  const { clearCart } = useContext(CartContext); // Obtener clearCart del contexto
+
+  const handleLogout = () => {
+    logout();
+    clearCart(); // Limpiar el carrito al cerrar sesión
+  };
 
   return (
     <Navbar bg="light" expand="lg" className="shadow-sm">
@@ -86,7 +93,7 @@ function CustomNavbar() {
                   </NavDropdown.Item>
 
                   <NavDropdown.Divider />
-                  <NavDropdown.Item onClick={logout} className="text-danger">
+                  <NavDropdown.Item onClick={handleLogout} className="text-danger">
                     <i className="bi bi-box-arrow-right me-2"></i>Cerrar sesión
                   </NavDropdown.Item>
                 </NavDropdown>

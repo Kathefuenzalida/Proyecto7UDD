@@ -16,6 +16,9 @@ export default function Cart() {
       const pref = res.data?.id || res.data?.preferenceId || res.data?.init_point;
       if (!pref) throw new Error("Preferencia inválida");
 
+      // Limpiar el carrito después de iniciar el checkout
+      clearCart();
+
       // redirección
       window.location.href = `https://www.mercadopago.cl/checkout/v1/redirect?pref_id=${pref}`;
     } catch (err) {
