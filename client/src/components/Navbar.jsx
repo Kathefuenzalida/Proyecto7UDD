@@ -26,6 +26,9 @@ function CustomNavbar() {
             <Nav.Link as={Link} to="/#interior">Plantas de Interior</Nav.Link>
             <Nav.Link as={Link} to="/#exterior">Plantas de Exterior</Nav.Link>
             <Nav.Link as={Link} to="/recomendaciones">Recomendaciones</Nav.Link>
+            <Nav.Link as={Link} to="/cart" className="d-flex align-items-center">
+              <i className="bi bi-cart me-1"></i> Carrito
+            </Nav.Link>
 
             {/* 🔑 Opciones dinámicas según login */}
             {authStatus ? (
